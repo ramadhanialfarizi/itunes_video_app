@@ -133,12 +133,6 @@ class _SigninPageState extends State<SigninPage> {
                                     color: Color(0xFFEA4CC0),
                                   ),
                                 ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: const BorderSide(
-                                    color: Color(0xFFEA4CC0),
-                                  ),
-                                ),
                                 prefixIconColor: const Color(0xFFEA4CC0),
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIconColor: const Color(0xFFEA4CC0),
