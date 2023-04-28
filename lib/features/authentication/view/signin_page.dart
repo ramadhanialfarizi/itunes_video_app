@@ -229,7 +229,7 @@ class _SigninPageState extends State<SigninPage> {
 
                                     // ignore: use_build_context_synchronously
                                     Navigator.pushReplacementNamed(
-                                        context, '/home');
+                                        context, '/main');
                                   }
                                 }
                               },
