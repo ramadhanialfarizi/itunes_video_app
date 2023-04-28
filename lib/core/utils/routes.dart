@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:itunes_video_app/features/authentication/view/signin_page.dart';
 import 'package:itunes_video_app/features/authentication/view/signup_page.dart';
-import 'package:itunes_video_app/features/home/view/home_page.dart';
+import 'package:itunes_video_app/features/home/view/main_page.dart';
 
 import '../../features/onboarding/view/splash_screen.dart';
 
@@ -20,9 +20,9 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const SignupPage(),
         );
-      case '/home':
+      case '/main':
         return MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const MainPage(),
         );
       // case '/people':
       //   return MaterialPageRoute(
