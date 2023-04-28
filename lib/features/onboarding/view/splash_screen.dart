@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (userSignin.currentUser == null) {
         Navigator.of(context).pushReplacementNamed('/signin');
       } else {
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushReplacementNamed('/main');
       }
     });
   }
