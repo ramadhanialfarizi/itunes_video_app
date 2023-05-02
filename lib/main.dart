@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:itunes_video_app/core/utils/routes.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signin_provider.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signup_provider.dart';
+import 'package:itunes_video_app/features/home/view_model/find_music_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -21,6 +22,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => SignupProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FindMusicProvider(),
         ),
       ],
       child: const MyApp(),
