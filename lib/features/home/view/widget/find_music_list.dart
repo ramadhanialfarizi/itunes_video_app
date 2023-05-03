@@ -16,57 +16,6 @@ class _FindMusicListState extends State<FindMusicList> {
 
   @override
   Widget build(BuildContext context) {
-    // return GridView.builder(
-    //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //     crossAxisCount: 2,
-    //     mainAxisSpacing: 10.0,
-    //     crossAxisSpacing: 10.0,
-    //     mainAxisExtent: 185,
-    //   ),
-    //   physics: const NeverScrollableScrollPhysics(),
-    //   shrinkWrap: true,
-    //   itemCount: widget.findMusicModel?.results?.length,
-    //   itemBuilder: (context, index) {
-    //     return InkWell(
-    //       onTap: () {},
-    //       child: Column(
-    //         children: [
-    //           // ClipRRect(
-    //           //   borderRadius: const BorderRadius.only(
-    //           //       bottomLeft: Radius.circular(13),
-    //           //       bottomRight: Radius.circular(13),
-    //           //       topLeft: Radius.circular(13),
-    //           //       topRight: Radius.circular(13)),
-    //           //   child: Image.network(
-    //           //     '${widget.findMusicModel?.results?[index].artworkUrl100}',
-    //           //     height: 100,
-    //           //     width: 200,
-    //           //     fit: BoxFit.fitWidth,
-    //           //   ),
-    //           // ),
-    //           Container(
-    //             width: 150,
-    //             height: 90,
-    //             decoration: BoxDecoration(
-    //               borderRadius: BorderRadius.circular(12),
-    //               image: DecorationImage(
-    //                 image: NetworkImage(
-    //                     '${widget.findMusicModel?.results?[index].artworkUrl100}',
-    //                     scale: 10),
-    //                 fit: BoxFit.cover,
-    //               ),
-    //             ),
-    //             child: const SizedBox(),
-    //           ),
-    //           const SizedBox(
-    //             height: 19,
-    //           ),
-    //           Text('${widget.findMusicModel?.results?[index].trackName}')
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // );
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -80,7 +29,7 @@ class _FindMusicListState extends State<FindMusicList> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => DetailPage(
-                    findMusicModel: widget.findMusicModel,
+                    result: widget.findMusicModel?.results?[index],
                     favoriteStatus: favoriteStatus,
                   ),
                 ),

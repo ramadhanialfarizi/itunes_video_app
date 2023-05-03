@@ -13,8 +13,8 @@ class FindMusicProvider extends ChangeNotifier {
   void getFindMusic(String? query) async {
     try {
       state = ResultState.loading;
-      final source = await _musicRepository.getFindMusic(query);
       notifyListeners();
+      final source = await _musicRepository.getFindMusic(query);
 
       if (source.results!.isEmpty) {
         state = ResultState.noData;

@@ -24,6 +24,25 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: false,
       ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                const Text(
+                  'My Music',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromARGB(255, 241, 139, 214),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

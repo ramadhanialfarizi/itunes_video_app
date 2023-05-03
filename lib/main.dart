@@ -5,6 +5,7 @@ import 'package:itunes_video_app/core/utils/routes.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signin_provider.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signup_provider.dart';
 import 'package:itunes_video_app/features/home/view_model/find_music_provider.dart';
+import 'package:itunes_video_app/features/home/view_model/video_controller_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -26,6 +27,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => FindMusicProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => VideoControllerProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -38,10 +42,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

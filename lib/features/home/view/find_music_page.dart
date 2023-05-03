@@ -51,7 +51,7 @@ class _FindMusicPageState extends State<FindMusicPage> {
                   child: TextFormField(
                     controller: searchController,
                     decoration: InputDecoration(
-                      hintText: 'find your music...',
+                      hintText: 'find a music...',
                       //labelText: 'Email',
                       filled: true,
                       fillColor: Colors.grey[200],
