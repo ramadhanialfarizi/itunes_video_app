@@ -7,10 +7,26 @@ import 'package:itunes_video_app/features/home/model/music_model.dart';
 class FindMusicProvider extends ChangeNotifier {
   final MusicRepository _musicRepository = MusicDataSourceImpl();
 
-  ResultState? state;
+  ResultState? state = ResultState.noData;
   FindMusicModel? findMusicModel;
 
   void getFindMusic(String? query) async {
-    final source = await _musicRepository.getFindMusic(query);
+    try {
+      state = ResultState.loading;
+      final source = await _musicRepository.getFindMusic(query);
+      notifyListeners();
+
+      if (source.results!.isEmpty) {
+        state = ResultState.noData;
+        notifyListeners();
+      } else {
+        state = ResultState.hasData;
+        findMusicModel = source;
+        notifyListeners();
+      }
+    } catch (e) {
+      state = ResultState.error;
+      notifyListeners();
+    }
   }
 }

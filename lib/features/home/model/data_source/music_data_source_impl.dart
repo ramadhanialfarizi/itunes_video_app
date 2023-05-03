@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import 'package:itunes_video_app/features/home/model/data_source/music_repository.dart';
@@ -12,13 +14,14 @@ class MusicDataSourceImpl implements MusicRepository {
         queryParameters: {
           'entity': 'musicVideo',
           'term': query,
+          'country': 'US',
         },
       );
 
       if (response.statusCode == 200) {
         print(response.data);
 
-        var result = FindMusicModel.fromJson(response.data);
+        var result = FindMusicModel.fromJson(jsonDecode(response.data));
 
         return result;
       } else {
@@ -26,6 +29,7 @@ class MusicDataSourceImpl implements MusicRepository {
         throw Exception();
       }
     } catch (e) {
+      print(e);
       rethrow;
     }
   }

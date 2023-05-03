@@ -15,7 +15,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: const Sidebar(),
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text(
+          'Home',
+          style: TextStyle(
+            color: Color(0xFFEA4CC0),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         centerTitle: false,
       ),
     );

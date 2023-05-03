@@ -1,6 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:itunes_video_app/core/global_widget/empty_data.dart';
+import 'package:itunes_video_app/core/global_widget/error.dart';
+import 'package:itunes_video_app/core/utils/enum.dart';
+import 'package:itunes_video_app/features/home/view/widget/find_music_list.dart';
 import 'package:itunes_video_app/features/home/view_model/find_music_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +31,13 @@ class _FindMusicPageState extends State<FindMusicPage> {
     return Scaffold(
       drawer: const Sidebar(),
       appBar: AppBar(
-        title: const Text('Find music'),
+        title: const Text(
+          'Find music',
+          style: TextStyle(
+            color: Color(0xFFEA4CC0),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -72,7 +82,27 @@ class _FindMusicPageState extends State<FindMusicPage> {
                 const SizedBox(
                   height: 50,
                 ),
-                Text('halloooo')
+                Consumer<FindMusicProvider>(
+                  builder: (context, findMusicValue, child) {
+                    if (findMusicValue.state == ResultState.loading) {
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height / 5.3,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    } else if (findMusicValue.state == ResultState.hasData) {
+                      /// CHange here
+                      return FindMusicList(
+                        findMusicModel: findMusicValue.findMusicModel,
+                      );
+                    } else if (findMusicValue.state == ResultState.noData) {
+                      return const EmptyData();
+                    } else {
+                      return const ErrorData();
+                    }
+                  },
+                )
               ],
             ),
           ),
