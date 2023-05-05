@@ -7,7 +7,7 @@ import 'package:itunes_video_app/features/home/model/music_model.dart';
 class FindMusicProvider extends ChangeNotifier {
   final MusicRepository _musicRepository = MusicDataSourceImpl();
 
-  ResultState? state = ResultState.noData;
+  ResultState? state = ResultState.init;
   FindMusicModel? findMusicModel;
 
   void getFindMusic(String? query) async {

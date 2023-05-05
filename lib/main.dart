@@ -5,6 +5,7 @@ import 'package:itunes_video_app/core/utils/routes.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signin_provider.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signup_provider.dart';
 import 'package:itunes_video_app/features/home/view_model/find_music_provider.dart';
+import 'package:itunes_video_app/features/home/view_model/my_music_provider.dart';
 import 'package:itunes_video_app/features/home/view_model/video_controller_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => VideoControllerProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MyMusicProvider(),
         ),
       ],
       child: const MyApp(),

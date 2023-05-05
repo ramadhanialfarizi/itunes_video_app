@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:itunes_video_app/core/global_widget/line.dart';
 import 'package:itunes_video_app/features/home/model/music_model.dart';
+import 'package:itunes_video_app/features/home/model/my_music_model.dart';
+import 'package:itunes_video_app/features/home/view_model/my_music_provider.dart';
 import 'package:itunes_video_app/features/home/view_model/video_controller_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
@@ -10,12 +12,14 @@ import 'package:video_player/video_player.dart';
 class DetailPage extends StatefulWidget {
   const DetailPage({
     super.key,
-    required this.result,
+    this.result,
+    this.myMusicModel,
     required this.favoriteStatus,
   });
 
   final Result? result;
-  final bool favoriteStatus;
+  final MyMusicModel? myMusicModel;
+  final bool? favoriteStatus;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -27,12 +31,21 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     //print(widget.result?.previewUrl);
-    videoPlayerController =
-        VideoPlayerController.network('${widget.result?.previewUrl}')
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    videoPlayerController.play();
+    if (widget.favoriteStatus == false) {
+      videoPlayerController =
+          VideoPlayerController.network('${widget.result?.previewUrl}')
+            ..initialize().then((_) {
+              setState(() {});
+            });
+      videoPlayerController.play();
+    } else {
+      videoPlayerController =
+          VideoPlayerController.network('${widget.myMusicModel?.previewUrl}')
+            ..initialize().then((_) {
+              setState(() {});
+            });
+      videoPlayerController.play();
+    }
     //videoPlayerController.setVolume(20);
     //videoPlayerController.
     //videoPlayerController.setLooping(true);
@@ -96,82 +109,36 @@ class _DetailPageState extends State<DetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.result?.trackName ?? '',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                      ),
-                    ),
+                    title(),
                     const SizedBox(
                       height: 7,
                     ),
-                    Text(
-                      widget.result?.artistName ?? '',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                      ),
+                    artistName(),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: button(),
+                    ),
+                    const SizedBox(
+                      height: 26,
+                    ),
+                    const Line(
+                      color: Color(0xFFEA4CC0),
+                    ),
+                    const SizedBox(
+                      height: 26,
+                    ),
+                    const Text(
+                      'Album Name',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    if (widget.favoriteStatus == true) ...[
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.remove_circle_outline,
-                          color: Colors.white,
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFFEA4CC0),
-                          ),
-                        ),
-                        label: const Text(
-                          'remove music',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ] else ...[
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFFEA4CC0),
-                          ),
-                        ),
-                        label: const Text(
-                          'add to my music',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 26,
-                      ),
-                      const Line(
-                        color: Color(0xFFEA4CC0),
-                      ),
-                      const SizedBox(
-                        height: 26,
-                      ),
-                      const Text(
-                        'Album Name',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 16),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Text(
-                        widget.result?.collectionName ?? 'not found',
-                        style: const TextStyle(fontWeight: FontWeight.w300),
-                      ),
-                    ]
+                    albumName(),
                   ],
                 ),
               ),
@@ -251,5 +218,138 @@ class _DetailPageState extends State<DetailPage> {
         );
       },
     );
+  }
+
+  Widget title() {
+    if (widget.favoriteStatus == true) {
+      return Text(
+        widget.myMusicModel?.trackName ?? '',
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 20,
+        ),
+      );
+    } else {
+      return Text(
+        widget.result?.trackName ?? '',
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 20,
+        ),
+      );
+    }
+  }
+
+  Widget artistName() {
+    if (widget.favoriteStatus == true) {
+      return Text(
+        widget.myMusicModel?.artistName ?? '',
+        style: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 15,
+        ),
+      );
+    } else {
+      return Text(
+        widget.result?.artistName ?? '',
+        style: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 15,
+        ),
+      );
+    }
+  }
+
+  Widget button() {
+    if (widget.favoriteStatus == true) {
+      return ElevatedButton.icon(
+        onPressed: () {
+          try {
+            context
+                .read<MyMusicProvider>()
+                .removeMyMusic(widget.myMusicModel?.id);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('remove from my music'),
+                duration: Duration(milliseconds: 800),
+              ),
+            );
+
+            Navigator.pop(context);
+          } catch (e) {}
+        },
+        icon: const Icon(
+          Icons.delete,
+          color: Colors.white,
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            const Color(0xFFEA4CC0),
+          ),
+        ),
+        label: const Text(
+          'remove music',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    } else {
+      return ElevatedButton.icon(
+        onPressed: () {
+          try {
+            final myMusic = MyMusicModel(
+              artistName: widget.result?.artistName,
+              artworkUrl100: widget.result?.artworkUrl100,
+              collectionName: widget.result?.collectionName,
+              previewUrl: widget.result?.previewUrl,
+              trackName: widget.result?.trackName,
+            );
+
+            context.read<MyMusicProvider>().addMyMusic(myMusic);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('add to my music'),
+                duration: Duration(milliseconds: 800),
+              ),
+            );
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('failed add to my music'),
+                duration: Duration(milliseconds: 800),
+              ),
+            );
+          }
+        },
+        icon: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            const Color(0xFFEA4CC0),
+          ),
+        ),
+        label: const Text(
+          'add to my music',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
+  }
+
+  Widget albumName() {
+    if (widget.favoriteStatus == true) {
+      return Text(
+        widget.myMusicModel?.collectionName ?? 'not found',
+        style: const TextStyle(fontWeight: FontWeight.w300),
+      );
+    } else {
+      return Text(
+        widget.result?.collectionName ?? 'not found',
+        style: const TextStyle(fontWeight: FontWeight.w300),
+      );
+    }
   }
 }

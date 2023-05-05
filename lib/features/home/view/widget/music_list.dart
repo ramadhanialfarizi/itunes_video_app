@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:itunes_video_app/features/home/model/music_model.dart';
 import 'package:itunes_video_app/features/home/view/detail_page.dart';
 
-class FindMusicList extends StatefulWidget {
-  const FindMusicList({super.key, required this.findMusicModel});
+class MusicList extends StatefulWidget {
+  const MusicList(
+      {super.key, required this.findMusicModel, required this.favoriteStatus});
 
   final FindMusicModel? findMusicModel;
+  final bool? favoriteStatus;
 
   @override
-  State<FindMusicList> createState() => _FindMusicListState();
+  State<MusicList> createState() => _MusicListState();
 }
 
-class _FindMusicListState extends State<FindMusicList> {
-  final bool favoriteStatus = false;
+class _MusicListState extends State<MusicList> {
+  //final bool favoriteStatus = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _FindMusicListState extends State<FindMusicList> {
                 MaterialPageRoute(
                   builder: (context) => DetailPage(
                     result: widget.findMusicModel?.results?[index],
-                    favoriteStatus: favoriteStatus,
+                    favoriteStatus: widget.favoriteStatus,
                   ),
                 ),
               );
