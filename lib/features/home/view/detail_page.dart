@@ -277,7 +277,14 @@ class _DetailPageState extends State<DetailPage> {
             );
 
             Navigator.pop(context);
-          } catch (e) {}
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('remove failed'),
+                duration: Duration(milliseconds: 800),
+              ),
+            );
+          }
         },
         icon: const Icon(
           Icons.delete,

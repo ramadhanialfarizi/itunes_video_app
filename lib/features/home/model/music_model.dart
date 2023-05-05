@@ -24,8 +24,8 @@ class FindMusicModel {
 }
 
 class Result {
-  WrapperType? wrapperType;
-  Kind? kind;
+  String? wrapperType;
+  String? kind;
   int? artistId;
   int? collectionId;
   int? trackId;
@@ -44,15 +44,15 @@ class Result {
   double? collectionPrice;
   double? trackPrice;
   DateTime? releaseDate;
-  Explicitness? collectionExplicitness;
-  Explicitness? trackExplicitness;
+  String? collectionExplicitness;
+  String? trackExplicitness;
   int? discCount;
   int? discNumber;
   int? trackCount;
   int? trackNumber;
   int? trackTimeMillis;
-  Country? country;
-  Currency? currency;
+  String? country;
+  String? currency;
   String? primaryGenreName;
 
   Result({
@@ -89,8 +89,8 @@ class Result {
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        wrapperType: wrapperTypeValues.map[json["wrapperType"]]!,
-        kind: kindValues.map[json["kind"]]!,
+        wrapperType: json["wrapperType"],
+        kind: json["kind"],
         artistId: json["artistId"],
         collectionId: json["collectionId"],
         trackId: json["trackId"],
@@ -111,22 +111,21 @@ class Result {
         releaseDate: json["releaseDate"] == null
             ? null
             : DateTime.parse(json["releaseDate"]),
-        collectionExplicitness:
-            explicitnessValues.map[json["collectionExplicitness"]]!,
-        trackExplicitness: explicitnessValues.map[json["trackExplicitness"]]!,
+        collectionExplicitness: json["collectionExplicitness"],
+        trackExplicitness: json["trackExplicitness"],
         discCount: json["discCount"],
         discNumber: json["discNumber"],
         trackCount: json["trackCount"],
         trackNumber: json["trackNumber"],
         trackTimeMillis: json["trackTimeMillis"],
-        country: countryValues.map[json["country"]]!,
-        currency: currencyValues.map[json["currency"]]!,
+        country: json["country"],
+        currency: json["currency"],
         primaryGenreName: json["primaryGenreName"],
       );
 
   Map<String, dynamic> toJson() => {
-        "wrapperType": wrapperTypeValues.reverse[wrapperType],
-        "kind": kindValues.reverse[kind],
+        "wrapperType": wrapperType,
+        "kind": kind,
         "artistId": artistId,
         "collectionId": collectionId,
         "trackId": trackId,
@@ -145,49 +144,15 @@ class Result {
         "collectionPrice": collectionPrice,
         "trackPrice": trackPrice,
         "releaseDate": releaseDate?.toIso8601String(),
-        "collectionExplicitness":
-            explicitnessValues.reverse[collectionExplicitness],
-        "trackExplicitness": explicitnessValues.reverse[trackExplicitness],
+        "collectionExplicitness": collectionExplicitness,
+        "trackExplicitness": trackExplicitness,
         "discCount": discCount,
         "discNumber": discNumber,
         "trackCount": trackCount,
         "trackNumber": trackNumber,
         "trackTimeMillis": trackTimeMillis,
-        "country": countryValues.reverse[country],
-        "currency": currencyValues.reverse[currency],
+        "country": country,
+        "currency": currency,
         "primaryGenreName": primaryGenreName,
       };
-}
-
-enum Explicitness { NOT_EXPLICIT }
-
-final explicitnessValues =
-    EnumValues({"notExplicit": Explicitness.NOT_EXPLICIT});
-
-enum Country { USA }
-
-final countryValues = EnumValues({"USA": Country.USA});
-
-enum Currency { USD }
-
-final currencyValues = EnumValues({"USD": Currency.USD});
-
-enum Kind { MUSIC_VIDEO }
-
-final kindValues = EnumValues({"music-video": Kind.MUSIC_VIDEO});
-
-enum WrapperType { TRACK }
-
-final wrapperTypeValues = EnumValues({"track": WrapperType.TRACK});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }
