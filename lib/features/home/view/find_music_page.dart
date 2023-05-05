@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:itunes_video_app/core/global_widget/empty_data.dart';
 import 'package:itunes_video_app/core/global_widget/error.dart';
 import 'package:itunes_video_app/core/utils/enum.dart';
-import 'package:itunes_video_app/features/home/view/widget/init_data.dart';
+import 'package:itunes_video_app/features/home/view/widget/init_find_music.dart';
 import 'package:itunes_video_app/features/home/view/widget/music_list.dart';
 import 'package:itunes_video_app/features/home/view_model/find_music_provider.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +86,7 @@ class _FindMusicPageState extends State<FindMusicPage> {
                 Consumer<FindMusicProvider>(
                   builder: (context, findMusicValue, child) {
                     if (findMusicValue.state == ResultState.init) {
-                      return const InitData();
+                      return const InitFindMusic();
                     } else if (findMusicValue.state == ResultState.loading) {
                       return SizedBox(
                         height: MediaQuery.of(context).size.height / 5.3,

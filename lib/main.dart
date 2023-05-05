@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:itunes_video_app/core/utils/routes.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signin_provider.dart';
 import 'package:itunes_video_app/features/authentication/view_model/signup_provider.dart';

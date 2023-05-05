@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:itunes_video_app/core/global_widget/empty_data.dart';
 import 'package:itunes_video_app/core/global_widget/error.dart';
 import 'package:itunes_video_app/features/home/model/my_music_model.dart';
-import 'package:itunes_video_app/features/home/view/widget/music_list.dart';
+import 'package:itunes_video_app/features/home/view/widget/my_music_empty.dart';
 import 'package:itunes_video_app/features/home/view_model/my_music_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -66,6 +65,11 @@ class _HomePageState extends State<HomePage> {
                             child: const Center(
                               child: CircularProgressIndicator(),
                             ),
+                          );
+                        } else if (snapshot.data!.docs.isEmpty) {
+                          return const Padding(
+                            padding: EdgeInsets.only(top: 70.0),
+                            child: MyMusicEmpty(),
                           );
                         } else {
                           return ListView.builder(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InitData extends StatelessWidget {
-  const InitData({super.key});
+class InitFindMusic extends StatelessWidget {
+  const InitFindMusic({super.key});
 
   @override
   Widget build(BuildContext context) {
