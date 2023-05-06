@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class VideoControllerProvider extends ChangeNotifier {
-  bool videoIsPlay = true;
+  bool? videoIsPlay = false;
+
+  // VideoControllerProvider({
+  //   this.videoIsPlay,
+  // });
 
   void changeVideoPlay() {
-    videoIsPlay = !videoIsPlay;
+    videoIsPlay = !videoIsPlay!;
     notifyListeners();
   }
 }
