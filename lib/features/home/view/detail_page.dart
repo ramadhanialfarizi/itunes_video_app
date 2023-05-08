@@ -342,51 +342,59 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget seeAlbumInformation() {
     if (widget.favoriteStatus == true) {
-      return OutlinedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WebViewDetailPage(
-                  url: widget.myMusicModel?.collectionViewUrl),
-            ),
-          );
-        },
-        style: ButtonStyle(
-          side: MaterialStateProperty.all(
-            const BorderSide(
-              color: Color(0xFFEA4CC0),
+      if (widget.myMusicModel?.collectionViewUrl == null) {
+        return const SizedBox();
+      } else {
+        return OutlinedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WebViewDetailPage(
+                    url: widget.myMusicModel?.collectionViewUrl),
+              ),
+            );
+          },
+          style: ButtonStyle(
+            side: MaterialStateProperty.all(
+              const BorderSide(
+                color: Color(0xFFEA4CC0),
+              ),
             ),
           ),
-        ),
-        child: const Text(
-          'See music information',
-          style: TextStyle(color: Color(0xFFEA4CC0)),
-        ),
-      );
+          child: const Text(
+            'See music information',
+            style: TextStyle(color: Color(0xFFEA4CC0)),
+          ),
+        );
+      }
     } else {
-      return OutlinedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  WebViewDetailPage(url: widget.result?.collectionViewUrl),
-            ),
-          );
-        },
-        style: ButtonStyle(
-          side: MaterialStateProperty.all(
-            const BorderSide(
-              color: Color(0xFFEA4CC0),
+      if (widget.result?.collectionViewUrl == null) {
+        return const SizedBox();
+      } else {
+        return OutlinedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    WebViewDetailPage(url: widget.result?.collectionViewUrl),
+              ),
+            );
+          },
+          style: ButtonStyle(
+            side: MaterialStateProperty.all(
+              const BorderSide(
+                color: Color(0xFFEA4CC0),
+              ),
             ),
           ),
-        ),
-        child: const Text(
-          'See music information',
-          style: TextStyle(color: Color(0xFFEA4CC0)),
-        ),
-      );
+          child: const Text(
+            'See music information',
+            style: TextStyle(color: Color(0xFFEA4CC0)),
+          ),
+        );
+      }
     }
   }
 
