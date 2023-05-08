@@ -96,6 +96,10 @@ class _HomePageState extends State<HomePage> {
                                                 item?['collectionName'],
                                             previewUrl: item?['previewUrl'],
                                             trackName: item?['trackName'],
+                                            artistViewUrl:
+                                                item?['artistViewUrl'],
+                                            collectionViewUrl:
+                                                item?['collectionViewUrl'],
                                           ),
                                           favoriteStatus: favoriteStatus,
                                         ),

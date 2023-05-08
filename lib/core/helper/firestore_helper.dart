@@ -22,6 +22,8 @@ class FirestoreHelper implements FirestoreHelperRepository {
         'atworkUrl': myMusicModel.artworkUrl100,
         'collectionName': myMusicModel.collectionName,
         'previewUrl': myMusicModel.previewUrl,
+        'artistViewUrl': myMusicModel.artistViewUrl,
+        'collectionViewUrl': myMusicModel.collectionViewUrl,
       });
 
       return myMusicData;

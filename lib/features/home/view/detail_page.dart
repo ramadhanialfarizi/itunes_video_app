@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:itunes_video_app/core/global_widget/line.dart';
 import 'package:itunes_video_app/features/home/model/music_model.dart';
 import 'package:itunes_video_app/features/home/model/my_music_model.dart';
+import 'package:itunes_video_app/features/home/view/web_view_page.dart';
 import 'package:itunes_video_app/features/home/view_model/my_music_provider.dart';
 import 'package:itunes_video_app/features/home/view_model/video_controller_provider.dart';
 import 'package:provider/provider.dart';
@@ -188,7 +189,7 @@ class _DetailPageState extends State<DetailPage> {
     }
   }
 
-  Widget button() {
+  Widget addMyMusicbutton() {
     if (widget.favoriteStatus == true) {
       return ElevatedButton.icon(
         onPressed: () {
@@ -233,12 +234,13 @@ class _DetailPageState extends State<DetailPage> {
         onPressed: () {
           try {
             final myMusic = MyMusicModel(
-              artistName: widget.result?.artistName,
-              artworkUrl100: widget.result?.artworkUrl100,
-              collectionName: widget.result?.collectionName,
-              previewUrl: widget.result?.previewUrl,
-              trackName: widget.result?.trackName,
-            );
+                artistName: widget.result?.artistName,
+                artworkUrl100: widget.result?.artworkUrl100,
+                collectionName: widget.result?.collectionName,
+                previewUrl: widget.result?.previewUrl,
+                trackName: widget.result?.trackName,
+                artistViewUrl: widget.result?.artistViewUrl,
+                collectionViewUrl: widget.result?.collectionViewUrl);
 
             context.read<MyMusicProvider>().addMyMusic(myMusic);
 
@@ -274,6 +276,56 @@ class _DetailPageState extends State<DetailPage> {
     }
   }
 
+  Widget seeArtistProfileButton() {
+    if (widget.favoriteStatus == true) {
+      return OutlinedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  WebViewDetailPage(url: widget.myMusicModel?.artistViewUrl),
+            ),
+          );
+        },
+        style: ButtonStyle(
+          side: MaterialStateProperty.all(
+            const BorderSide(
+              color: Color(0xFFEA4CC0),
+            ),
+          ),
+        ),
+        child: const Text(
+          'See artist profile',
+          style: TextStyle(color: Color(0xFFEA4CC0)),
+        ),
+      );
+    } else {
+      return OutlinedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  WebViewDetailPage(url: widget.result?.artistViewUrl),
+            ),
+          );
+        },
+        style: ButtonStyle(
+          side: MaterialStateProperty.all(
+            const BorderSide(
+              color: Color(0xFFEA4CC0),
+            ),
+          ),
+        ),
+        child: const Text(
+          'See artist profile',
+          style: TextStyle(color: Color(0xFFEA4CC0)),
+        ),
+      );
+    }
+  }
+
   Widget albumName() {
     if (widget.favoriteStatus == true) {
       return Text(
@@ -288,119 +340,170 @@ class _DetailPageState extends State<DetailPage> {
     }
   }
 
+  Widget seeAlbumInformation() {
+    if (widget.favoriteStatus == true) {
+      return OutlinedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WebViewDetailPage(
+                  url: widget.myMusicModel?.collectionViewUrl),
+            ),
+          );
+        },
+        style: ButtonStyle(
+          side: MaterialStateProperty.all(
+            const BorderSide(
+              color: Color(0xFFEA4CC0),
+            ),
+          ),
+        ),
+        child: const Text(
+          'See music information',
+          style: TextStyle(color: Color(0xFFEA4CC0)),
+        ),
+      );
+    } else {
+      return OutlinedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  WebViewDetailPage(url: widget.result?.collectionViewUrl),
+            ),
+          );
+        },
+        style: ButtonStyle(
+          side: MaterialStateProperty.all(
+            const BorderSide(
+              color: Color(0xFFEA4CC0),
+            ),
+          ),
+        ),
+        child: const Text(
+          'See music information',
+          style: TextStyle(color: Color(0xFFEA4CC0)),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Container(
-            //   //height: 595,
-            //   decoration: const BoxDecoration(
-            //     borderRadius: BorderRadius.only(
-            //       bottomLeft: Radius.circular(30),
-            //       bottomRight: Radius.circular(30),
-            //     ),
-            //     color: Colors.black,
-            //   ),
-            //   child: Column(
-            //     children: [
-            //       // const SizedBox(
-            //       //   height: 86,
-            //       //   // height: 100,
-            //       // ),
-            //       // AspectRatio(
-            //       //   aspectRatio: videoPlayerController.value.aspectRatio,
-            //       //   child: videoPlayerController.value.isInitialized
-            //       //       ? VideoPlayer(videoPlayerController)
-            //       //       : const Padding(
-            //       //           padding: EdgeInsets.all(8),
-            //       //           child: CircularProgressIndicator(),
-            //       //         ),
-            //       // ),
-            //       // const SizedBox(
-            //       //   height: 16,
-            //       // ),
-            //       //videoController(context),
-            //       Chewie(controller: chewieController!),
-            //       // const SizedBox(
-            //       //   height: 16,
-            //       //   // height: 100,
-            //       // ),
-            //     ],
-            //   ),
-            // ),
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Container(
+              //   //height: 595,
+              //   decoration: const BoxDecoration(
+              //     borderRadius: BorderRadius.only(
+              //       bottomLeft: Radius.circular(30),
+              //       bottomRight: Radius.circular(30),
+              //     ),
+              //     color: Colors.black,
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       // const SizedBox(
+              //       //   height: 86,
+              //       //   // height: 100,
+              //       // ),
+              //       // AspectRatio(
+              //       //   aspectRatio: videoPlayerController.value.aspectRatio,
+              //       //   child: videoPlayerController.value.isInitialized
+              //       //       ? VideoPlayer(videoPlayerController)
+              //       //       : const Padding(
+              //       //           padding: EdgeInsets.all(8),
+              //       //           child: CircularProgressIndicator(),
+              //       //         ),
+              //       // ),
+              //       // const SizedBox(
+              //       //   height: 16,
+              //       // ),
+              //       //videoController(context),
+              //       Chewie(controller: chewieController!),
+              //       // const SizedBox(
+              //       //   height: 16,
+              //       //   // height: 100,
+              //       // ),
+              //     ],
+              //   ),
+              // ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.black,
                 ),
-                color: Colors.black,
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 86,
-                    // height: 100,
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Chewie(
+                    controller: chewieController!,
                   ),
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Chewie(
-                      controller: chewieController!,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    title(),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    artistName(),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: button(),
-                    ),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    const Line(
-                      color: Color(0xFFEA4CC0),
-                    ),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    const Text(
-                      'Album Name',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    albumName(),
-                  ],
                 ),
               ),
-            )
-          ],
+              const SizedBox(
+                height: 4,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      title(),
+                      const SizedBox(
+                        height: 7,
+                      ),
+                      artistName(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: addMyMusicbutton(),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: seeArtistProfileButton(),
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      const Line(
+                        color: Color(0xFFEA4CC0),
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      const Text(
+                        'Album Name',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      albumName(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: seeAlbumInformation(),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

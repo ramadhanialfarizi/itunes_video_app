@@ -13,7 +13,7 @@ class MyMusicEmpty extends StatelessWidget {
           Icon(
             Icons.music_note_outlined,
             size: 50,
-            color: const Color(0xFFdedede),
+            color: Color(0xFFdedede),
           ),
           SizedBox(
             height: 26,
@@ -22,7 +22,7 @@ class MyMusicEmpty extends StatelessWidget {
             '''You don't have any music''',
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              color: const Color(0xFFa1a1a1),
+              color: Color(0xFFa1a1a1),
             ),
             textAlign: TextAlign.center,
           ),
