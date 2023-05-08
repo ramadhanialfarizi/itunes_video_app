@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "439084392453",
+    "project_id": "itunes-video-app",
+    "storage_bucket": "itunes-video-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439084392453:android:3162b774dd40dc2efdfc6c",
+        "android_client_info": {
+          "package_name": "com.example.itunes_video_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439084392453-fa25dhd73ui2utareor0v25gh3onfcc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlae9FHcCO_aVrqrTEjGmz3_X9ZIQgXOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439084392453-fa25dhd73ui2utareor0v25gh3onfcc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
