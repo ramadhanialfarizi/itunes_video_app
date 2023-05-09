@@ -49,7 +49,7 @@ Itunes search API
 
 ### Running the project
 
-stay on the master branch and Clone this project into your local device
+Stay on the master branch and clone this project into your local device
 
 ```
 git clone https://github.com/ramadhanialfarizi/watchit.git
