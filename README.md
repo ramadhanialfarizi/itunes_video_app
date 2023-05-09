@@ -1,16 +1,65 @@
 # itunes_video_app
 
-A new Flutter project.
+mobile app project to show a music from itunes
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### API Reference
 
-A few resources to get you started if this is your first Flutter project:
+The Movie Database API
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[API Reference](https://performance-partners.apple.com/search-api)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+### Tech stack used
+
+- Flutter
+- Firebase
+
+---
+
+### Flutter Package Used
+
+- Cuppertino Icon
+- Firebase Core
+- Firebase Auth
+- Cloud Firestore
+- Provider
+- Email Validator
+- dio
+- video_player
+- chewie
+- webview_flutter
+
+[reference for flutter](https://docs.flutter.dev/) 
+
+[reference for flutter package](https://pub.dev/)
+
+---
+
+### Firebase tech Used
+
+- Firebase Authentication
+- Firebase Cloud Firestore
+
+[reference for flutter and firebase](https://firebase.flutter.dev/docs/overview/)
+
+---
+
+### Running the project
+
+stay on the master branch and Clone this project into your local device
+
+```
+git clone https://github.com/ramadhanialfarizi/watchit.git
+```
+
+after that you must run pub get in your terminal to download the package into your local device
+
+```
+flutter pub get
+```
+
+after run flutter pub get, press f5 to debug the project.
+
