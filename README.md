@@ -6,7 +6,7 @@ mobile app project to show a music from itunes
 
 ### API Reference
 
-The Movie Database API
+Itunes search API
 
 [API Reference](https://performance-partners.apple.com/search-api)
 
